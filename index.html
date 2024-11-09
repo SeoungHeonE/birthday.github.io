@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>특별한 생일 이벤트</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+    <!-- 환영 팝업 -->
+    <div class="popup show" id="welcomePopup">
+        <h1>환영해요!</h1>
+        <div class="lottie" id="welcomeLottie"></div>
+        <p>시작하려면 "시작하기" 버튼을 눌러주세요.</p>
+        <button onclick="startEvent()">시작하기</button>
+    </div>
+
+    <!-- 상단 고정 음원 플레이어 팝업 -->
+    <div class="popup music-player fixed-top" id="musicPlayerPopup">
+        <div class="music-image">
+            <img src="./img/mind.jpg" alt="음원 이미지" id="audioImage">
+        </div>
+        <div class="controls">
+            <div class="button-group">
+                <button id="playButton">▶︎</button>
+                <button id="toggleLyricsButton">가사 보기</button>
+            </div>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+        </div>
+    </div>
+
+    <!-- 가사 컨테이너 전체 화면 -->
+    <div id="lyricsOverlay" class="lyrics-overlay">
+        <img src="./img/mind.jpg" alt="">
+        <div class="lyrics-black">
+            <button id="closeLyrics" class="close-btn">X</button>
+            <div id="lyricsText" class="lyrics-text"></div>
+
+            <div id="songProgressContainer">
+                <div id="sliderProgress"></div> <!-- 슬라이더 진행 상태 표시 -->
+                <input type="range" id="audioRangeSlider" min="0" max="100" step="0.1" value="0">
+            </div>
+            
+            <!-- 간소화 상태에서 나타나는 재생 버튼과 볼륨 슬라이더 -->
+            <div id="lyricsControls" class="lyrics-controls">
+                <!-- <button id="playPauseButton">▶︎</button> -->
+                <!-- <input type="range" id="lyricsVolumeSlider" min="0" max="1" step="0.01" value="1"> -->
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer" src="./music/mind.mp3" loop></audio>
+
+    <!-- 이름 입력 팝업 -->
+    <div class="popup" id="namePopup">
+        <h2>이름을 알려주세요!</h2>
+        <div class="lottie" id="userNameLottie"></div>
+        <input type="text" id="userNameInput" placeholder="사용하실 이름을 입력해주세요.">
+        <button onclick="startQuestions()">확인</button>
+    </div>
+
+    <!-- 질문 팝업 -->
+    <div class="popup" id="questionArea">
+        <div class="lottie" id="userNameLottie"></div>
+        <h2 id="questionText">질문이 여기에 나타납니다.</h2>
+        <input type="text" id="answerInput" placeholder="답변을 입력하세요">
+        <button onclick="nextQuestion()">다음 질문</button>
+    </div>
+
+    <!-- 최종 생일 축하 팝업 -->
+    <div class="popup" id="finalPopup">
+        <div class="lottie" id="finalLottie"></div>
+        <h1 id="finalMessage"></h1>
+        <p>네가 이 세상에 태어난 특별한 날을 진심으로 축하해!</p>
+    </div>
+
+
+
+    <!-- Lottie 웹 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/lyrics.js"></script>
+    <script src="./js/seekBar.js"></script>
+</body>
+
+</html>

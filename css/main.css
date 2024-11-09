@@ -1,0 +1,229 @@
+/* 전체 페이지에 반응형 스타일 적용 */
+body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;font-family: 'Pretendard-Regular'; background: linear-gradient(135deg, #ffafbd, #ffc3a0);}
+
+/* 팝업 스타일 */
+.popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 5vw; border-radius: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); text-align: center; width: 90vw; max-width: 500px; box-sizing: border-box; animation: bounceIn 0.6s ease; }
+
+.popup.show { display: block; }
+
+/* Lottie 애니메이션을 위한 스타일 */
+.lottie { width: 100px; margin: 5% auto; }
+
+/* 텍스트 애니메이션 */
+h1, h2 { font-size: 4vw; margin: 1vw 0; animation: popText 0.8s ease-out; color: #333; }
+
+p, #questionText { font-size: 4vw; margin: 2vw 0; color: #555; }
+
+/* 애니메이션 효과 */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        /* 시작 위치 */
+    }
+
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -55%);
+        /* 위로 튀어오르는 느낌 */
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+        /* 시작 위치 */
+    }
+}
+
+@keyframes popText {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* 버튼 스타일 */
+button { margin-top: 5%; padding: 2vw 4vw; font-size: 4vw; background-color: #ff6f61; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; }
+button:hover { background-color: #ff4c3b; transform: translateY(-2px); }
+
+
+input[type="text"] { width: 80%; padding: 2vw; font-size: 3vw; margin-bottom: 3vw; box-sizing: border-box; border: 1px solid #ff6f61; border-radius: 5px; }
+/* 클릭(포커스) 효과 */
+input[type="text"]:focus { background-color: #ffe5e5; border-color: #ff4c3b; outline: none; }
+
+
+/*************************************************************************************
+**************************************************************************************/
+/* 축소된 음원 플레이어 팝업 스타일 */
+/* 기본 음원 플레이어 스타일 */
+.popup.music-player { width: 60vw; max-width: 400px; padding: 20px; overflow: visible; transition: width 0.3s ease, max-width 0.3s ease, padding 0.3s ease; }
+/* 축소된 음원 플레이어 팝업 스타일 */
+.popup.music-player.collapsed { width: 30vw; max-width: 200px; padding: 5px; overflow: hidden; }
+.popup.music-player .music-image { display: flex; align-items: center; justify-content: center; }
+/* 이미지 크기 전환 효과 */
+.popup.music-player .music-image img { transition: width 0.3s ease; /* 전환 효과 */ }
+/* 축소된 상태에서 이미지 크기 */
+.popup.music-player.collapsed .music-image img { width: 12vw; }
+/* 컨트롤 숨김 (애니메이션은 적용되지 않지만 스무스하게 사라지도록 설정 가능) */
+.popup.music-player .controls { transition: opacity 0.3s ease; }
+.popup.music-player.collapsed .controls { display: none; pointer-events: none; /* 비활성화 */ }
+
+
+
+
+
+
+/* 상단 고정 스타일 */
+.fixed-top { position: fixed; top: 2%; left: 50%; transform: translateX(-50%); width: 90vw; max-width: 400px; background: rgba(255, 255, 255, 0.9); border-radius: 20px; padding: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); z-index: 1000; display: flex; flex-direction: column; align-items: center; gap: 1rem; z-index: 2001;}
+/* 음악 이미지 스타일 */
+.fixed-top .music-image img { width: 20vw; border-radius: 10%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }
+/* 컨트롤 스타일 */
+.fixed-top .controls { display: flex; align-items: center; gap: 0.5rem; }
+
+/* 버튼 그룹 가로 정렬 */
+.button-group { display: flex; gap: 0.5rem; justify-content: center; align-items: center;}
+/* 버튼 스타일 */
+.fixed-top button { font-size: 1rem; padding: 0.5rem 0.5rem; background-color: #ff6f61; color: white; border: none; border-radius: 10px; cursor: pointer; transition: background-color 0.3s, transform 0.2s; }
+.fixed-top button:hover { background-color: #ff4c3b; transform: translateY(-2px); }
+
+/* 음량 슬라이더 스타일 */
+#volumeSlider { -webkit-appearance: none; width: 80px; height: 6px; border-radius: 5px; background: linear-gradient(90deg, #ff6f61, #ff4c3b); outline: none; transition: opacity 0.2s; cursor: pointer; }
+#volumeSlider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 15px; height: 15px; background-color: #fff; border-radius: 50%; border: 2px solid #ff4c3b; cursor: pointer; transition: background-color 0.3s; }
+#volumeSlider::-webkit-slider-thumb:hover { background-color: #ff6f61; }
+
+/* 가사 텍스트 스타일 */
+.fixed-top .lyrics { display: none; font-size: 3vw; padding: 10px; color: #333; text-align: center; }
+
+
+.lyrics-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); background-size: cover; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.5s ease; z-index: 2000;}
+.lyrics-black { position: fixed; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); }
+.lyrics-overlay.show { opacity: 1; visibility: visible; }
+.lyrics-text {  font-size: 4vw;  color: gray;  text-align: center;  white-space: pre-line; z-index: 1; line-height: 3; padding: 2vw; }
+.lyrics-text .current-lyric { color: white;  filter: none; }
+.lyrics-text .previous-lyric {  color: gray;  filter: blur(1px); }
+.lyrics-text .next-lyric {  color: gray;  filter: none; }
+.lyrics-controls { display: none;  margin-top: 1rem; display: flex; gap: 0.5rem; align-items: center; }
+.lyrics-overlay.show .lyrics-controls { display: flex; }
+#lyricsOverlay img { width: 100%;}
+
+
+
+
+#songProgressContainer {
+    position: fixed; /* 화면에 고정 */
+    bottom: 300px; /* 화면 하단에서 300px 위 */
+    left: 50%; /* 화면 가로 중앙 */
+    transform: translateX(-50%); /* 왼쪽으로 50% 이동하여 정확한 중앙 배치 */
+    width: 100%; /* 전체 화면 너비 */
+    max-width: 400px; /* 최대 너비 400px */
+    height: 4px; /* 컨테이너 높이 */
+    background-color: #ddd; /* 배경 색 */
+    border-radius: 5px;
+    z-index: 999; /* 다른 요소보다 위에 표시 */
+    cursor: pointer;
+}
+
+#audioRangeSlider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%; /* 부모 컨테이너 너비에 맞춰서 꽉 채우기 */
+    height: 4px; /* 슬라이더 높이 */
+    background: transparent;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#audioRangeSlider::-webkit-slider-runnable-track {
+    height: 4px; /* 슬라이더 트랙 높이 */
+    background: transparent;
+    border-radius: 5px;
+}
+
+#audioRangeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 0; /* 둥그란 버튼 제거 */
+    height: 0;
+    background: transparent;
+}
+
+#audioRangeSlider::-moz-range-track {
+    height: 4px; /* 슬라이더 트랙 높이 */
+    background: transparent;
+    border-radius: 5px;
+}
+
+#audioRangeSlider::-moz-range-thumb {
+    width: 0;
+    height: 0;
+    background: transparent;
+}
+
+#sliderProgress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px; /* 슬라이더 높이와 일치 */
+    width: 0%; /* 초기 진행 상태 0% */
+    background-color: #ff4c3b; /* 진행 상태 색 */
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+.close-btn { position: absolute; top: 20px; right: 20px; background-color: transparent; color: white; border: none; font-size: 5vw; cursor: pointer; z-index: 1; }
+
+
+/*************************************************************************************
+**************************************************************************************/
+
+
+
+/*************************************************************************************
+**************************************************************************************/
+
+
+
+
+/* 미디어 쿼리 */
+@media (orientation: landscape) {
+    .popup {
+        width: 70vw;
+    }
+}
+
+/* 미디어 쿼리로 화면 크기에 따라 조정 */
+@media (max-width: 768px) {
+    .fixed-top {
+        width: 90vw;
+        padding: 10px;
+    }
+
+    .fixed-top .controls button,
+    .fixed-top #volumeSlider {
+        font-size: 3vw;
+    }
+}
+
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
